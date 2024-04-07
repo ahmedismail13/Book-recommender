@@ -1,0 +1,44 @@
+paths:
+  /reads:
+    post:
+      summary: Create a new read
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                book_id:
+                  type: integer
+                num_of_pages:
+                  type: integer
+            examples:
+              read:
+                value:
+                  user_id: 1
+                  book_id: 1
+                  start_page: 1
+                  end_page: 20
+      responses:
+        '201':
+          description: The read was successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Read'
+        '400':
+          description: Some parameters are missing or invalid
+components:
+  schemas:
+    Read:
+      type: object
+      properties:
+        id:
+          type: integer
+        book_id:
+          type: integer
+        start_page:
+          type: integer
+        end_page:
+          type: integer

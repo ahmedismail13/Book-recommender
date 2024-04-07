@@ -2,11 +2,12 @@ const Read = require("../models/read.model");
 const EventEmitter = require("../events/index");
 const ReadService = {};
 
-ReadService.createRead = async ({ book_id, num_of_pages }) => {
+ReadService.createRead = async ({ user_id, book_id, start_page, end_page }) => {
   const read = await Read.create({
+    user_id: user_id,
     book_id: book_id,
-    start_page: 1,
-    end_page: num_of_pages,
+    start_page: start_page,
+    end_page: end_page,
   });
 
   EventEmitter.emit("calculateReads", book_id);
